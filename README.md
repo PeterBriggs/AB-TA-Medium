@@ -1,53 +1,22 @@
-# Sequence Match Counter – C# Technical Assessment
+# 🔬 AB-TA-Medium: Search String Pattern Matching
 
-This is a C# console application developed as part of a technical assessment for a Senior Developer position at Agile Bridge.
-
-## 🧠 Problem Description
-
-Given a series of DNA sequence test cases, each consisting of a **search sequence** and a **target sequence**, the goal is to determine how many times variants of the search sequence appear in the target.
-
-There are three types of matches:
-
-- **Type 1 (Exact Match)**: The search sequence appears exactly as-is.
-- **Type 2 (Single Deletion Match)**: A version of the search sequence with one character removed appears.
-- **Type 3 (Single Insertion Match)**: A version of the search sequence with one additional character (A, G, C, or T) inserted appears.
-
-### 📥 Input Format
-
-- Each line contains two strings: the search sequence and the target sequence.
-- Input ends when a line containing only `0` is encountered.
-
-### 📤 Output Format
-
-- For each test case, output three integers separated by spaces:
-  ```
-  <Type1Count> <Type2Count> <Type3Count>
-  ```
-
-### ✅ Example
-
-**Input:**
-
-```
-AGC AGCTAGCAAGC
-TTT GATTACATTTA
-0
-```
-
-**Output:**
-
-```
-2 4 8
-1 3 7
-```
+This project was created as part of a technical assessment and solves a pattern matching problem involving a search string and a target string. The goal is to count how many times the search string appears in the target under three conditions.
 
 ---
 
-## 🛠 Technologies Used
+## 📋 Problem Summary
 
-- Language: **C# (.NET Core)**
-- Input/Output: `Console.ReadLine()` / `Console.WriteLine()`
-- Data structures: `HashSet<string>` for generating unique variants
+For each pair of strings:
+
+- **Type 1**: Count exact matches of the search string in the target.
+- **Type 2**: Count matches for all unique one-character deletions of the search string.
+- **Type 3**: Count matches for all unique one-character insertions into the search string.
+
+---
+
+## 💡 Solution Overview
+
+The logic is broken down into clean, separate methods for each match type. `HashSet<string>` is used to ensure unique variants for Types 2 and 3, and a reusable substring counting method handles the match checking. The program reads multiple test cases from standard input and outputs the three counts per line.
 
 ---
 
@@ -62,17 +31,23 @@ TTT GATTACATTTA
    ```
 3. Run the program:
    ```bash
-   dotnet run
+   dotnet run --project ProblemB\ProblemB.csproj
    ```
 
 You will be prompted to enter the input manually. End the input with a line containing just `0`.
 
 ---
 
-## 💡 Notes
+## ✅ Running the Tests
 
-- The program assumes all input is well-formed and consists of uppercase A/G/C/T characters only.
-- Match counting is non-overlapping and based on exact substring matching.
-- Duplicate variants are only counted once per type.
+To execute the included unit tests:
+
+1. Ensure you are in the root directory of the project.
+2. Run the following command:
+   ```bash
+   dotnet test
+   ```
+
+This will build and run all tests located in the `UnitTests.cs` file. Each test validates different match scenarios to ensure correctness across Types 1, 2, and 3.
 
 ---
