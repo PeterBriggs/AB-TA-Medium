@@ -18,7 +18,7 @@ class Program
 
         foreach (var result in results)
         {
-            Console.WriteLine($"{result.Type1Count} {result.Type2Count}");
+            Console.WriteLine($"{result.Type1Count} {result.Type2Count} {result.Type3Count}");
         }
     }
 
@@ -36,11 +36,13 @@ class Program
 
         int type1Count = CountType1(searchSequence, targetSequence);
         int type2Count = CountType2(searchSequence, targetSequence);
+        int type3Count = CountType3(searchSequence, targetSequence);
 
         return new SequenceResult
         {
             Type1Count = type1Count,
             Type2Count = type2Count,
+            Type3Count = type3Count,
         };
     }
 
@@ -77,6 +79,30 @@ class Program
         foreach (string deletionVariant in uniqueDeletionVariants)
         {
             totalOccurrences += CountSubstring(deletionVariant, targetSequence);
+        }
+
+        return totalOccurrences;
+    }
+
+    static int CountType3(string searchSequence, string targetSequence)
+    {
+        HashSet<string> uniqueInsertionVariants = new HashSet<string>();
+        char[] validCharacters = { 'A', 'G', 'C', 'T' };
+
+        // Generate all strings by inserting one character at each position
+        for (int insertPosition = 0; insertPosition <= searchSequence.Length; insertPosition++)
+        {
+            foreach (char character in validCharacters)
+            {
+                string variantWithInsertion = searchSequence.Substring(0, insertPosition) + character + searchSequence.Substring(insertPosition);
+                uniqueInsertionVariants.Add(variantWithInsertion);
+            }
+        }
+
+        int totalOccurrences = 0;
+        foreach (string insertionVariant in uniqueInsertionVariants)
+        {
+            totalOccurrences += CountSubstring(insertionVariant, targetSequence);
         }
 
         return totalOccurrences;
@@ -132,5 +158,9 @@ class SequenceResult
     * Type 2 matches are occurrences where the search sequence with one character deleted is found in the target sequence.
     */
     public int Type2Count { get; set; }
-    // public int Type3Count { get; set; }
+    /*
+    * Number of Type 3 matches found.
+    * Type 3 matches are occurrences where the search sequence with one character inserted is found in the target sequence.
+    */
+    public int Type3Count { get; set; }
 }
