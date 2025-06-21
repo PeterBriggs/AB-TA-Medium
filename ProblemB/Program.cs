@@ -54,6 +54,13 @@ class Program
         return CountSubstring(searchSequence, targetSequence);
     }
 
+    /*
+    * Counts Type 2 matches between search and target sequences.
+    * Type 2 matches are occurrences where one character is deleted from the search sequence.
+    * @param searchSequence The sequence to search for (e.g., "AGC")
+    * @param targetSequence The sequence to search within (e.g., "AGCTAGCAAGC")
+    * @return The number of times the modified search sequences appear in the target sequence
+    */
     static int CountType2(string searchSequence, string targetSequence)
     {
         HashSet<string> uniqueDeletionVariants = new HashSet<string>();
@@ -103,23 +110,23 @@ class Program
     }
 }
 
-/// <summary>
-/// Class to store the match counts for a sequence pair analysis.
-/// Contains the results of Type 1, Type 2, and Type 3 matches
-/// between a search sequence and target sequence.
-/// </summary>
+/*
+* Class to store the match counts for a sequence pair analysis.
+* Contains the results of Type 1, Type 2, and Type 3 matches
+* between a search sequence and target sequence.
+*/
 class SequenceResult
 {
-    /// <summary>
-    /// Number of Type 1 matches found.
-    /// Type 1 matches are exact occurrences of the search sequence in the target sequence.
-    /// </summary>
+    /*
+    * Number of Type 1 matches found.
+    * Type 1 matches are exact occurrences of the search sequence in the target sequence.
+    */
     public int Type1Count { get; set; }
 
-    /// <summary>
-    /// Number of Type 2 matches found.
-    /// Type 2 matches are occurrences where the search sequence with one character deleted is found in the target sequence.
-    /// </summary>
+    /*
+    * Number of Type 2 matches found.
+    * Type 2 matches are occurrences where the search sequence with one character deleted is found in the target sequence.
+    */
     public int Type2Count { get; set; }
     // public int Type3Count { get; set; }
 }
