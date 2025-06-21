@@ -18,7 +18,7 @@ class Program
 
         foreach (var result in results)
         {
-            Console.WriteLine($"{result.Type1Count}");
+            Console.WriteLine($"{result.Type1Count} {result.Type2Count}");
         }
     }
 
@@ -35,10 +35,12 @@ class Program
         string targetSequence = parts[1];
 
         int type1Count = CountType1(searchSequence, targetSequence);
+        int type2Count = CountType2(searchSequence, targetSequence);
 
         return new SequenceResult
         {
             Type1Count = type1Count,
+            Type2Count = type2Count,
         };
     }
 
@@ -74,6 +76,7 @@ class Program
         int totalOccurrences = 0;
         foreach (string deletionVariant in uniqueDeletionVariants)
         {
+            Console.WriteLine($"Counting occurrences of deletion variant: {deletionVariant}");
             totalOccurrences += CountSubstring(deletionVariant, targetSequence);
         }
 
@@ -82,22 +85,24 @@ class Program
 
     /*
     * Counts occurrences of a substring within a string.
-    * @param subStr The substring to search for
-    * @param mainStr The main string to search within
+    * @param searchSequence The substring to search for
+    * @param targetSequence The main string to search within
     * @return The number of occurrences
     */
-    static int CountSubstring(string subStr, string mainStr)
+    static int CountSubstring(string searchSequence, string targetSequence)
     {
-        if (subStr.Length > mainStr.Length)
+        if (searchSequence.Length > targetSequence.Length)
             return 0;
-
+        Console.WriteLine("1");
         int count = 0;
-        for (int i = 0; i <= mainStr.Length - subStr.Length; i++)
+        for (int i = 0; i <= targetSequence.Length - searchSequence.Length; i++)
         {
+            Console.WriteLine("2");
             bool match = true;
-            for (int j = 0; j < subStr.Length; j++)
+            for (int j = 0; j < searchSequence.Length; j++)
             {
-                if (mainStr[i + j] != subStr[j])
+                Console.WriteLine("3");
+                if (targetSequence[i + j] != searchSequence[j])
                 {
                     match = false;
                     break;
