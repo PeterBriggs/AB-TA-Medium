@@ -76,7 +76,6 @@ class Program
         int totalOccurrences = 0;
         foreach (string deletionVariant in uniqueDeletionVariants)
         {
-            Console.WriteLine($"Counting occurrences of deletion variant: {deletionVariant}");
             totalOccurrences += CountSubstring(deletionVariant, targetSequence);
         }
 
