@@ -54,6 +54,25 @@ class Program
         return CountSubstring(searchSequence, targetSequence);
     }
 
+    static int CountType2(string searchSequence, string targetSequence)
+    {
+        HashSet<string> uniqueDeletionVariants = new HashSet<string>();
+
+        for (int deletePosition = 0; deletePosition < searchSequence.Length; deletePosition++)
+        {
+            string variantWithDeletion = searchSequence.Substring(0, deletePosition) + searchSequence.Substring(deletePosition + 1);
+            uniqueDeletionVariants.Add(variantWithDeletion);
+        }
+
+        int totalOccurrences = 0;
+        foreach (string deletionVariant in uniqueDeletionVariants)
+        {
+            totalOccurrences += CountSubstring(deletionVariant, targetSequence);
+        }
+
+        return totalOccurrences;
+    }
+
     /*
     * Counts occurrences of a substring within a string.
     * @param subStr The substring to search for
@@ -96,6 +115,11 @@ class SequenceResult
     /// Type 1 matches are exact occurrences of the search sequence in the target sequence.
     /// </summary>
     public int Type1Count { get; set; }
-    // public int Type2Count { get; set; }
+
+    /// <summary>
+    /// Number of Type 2 matches found.
+    /// Type 2 matches are occurrences where the search sequence with one character deleted is found in the target sequence.
+    /// </summary>
+    public int Type2Count { get; set; }
     // public int Type3Count { get; set; }
 }
