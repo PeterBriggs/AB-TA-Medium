@@ -53,7 +53,7 @@ class Program
     * @param targetSequence The sequence to search within (e.g., "AGCTAGCAAGC")
     * @return The number of times the search sequence appears exactly in the target sequence
     */
-    static int CountType1(string searchSequence, string targetSequence)
+    public static int CountType1(string searchSequence, string targetSequence)
     {
         return CountSubstring(searchSequence, targetSequence);
     }
@@ -65,7 +65,7 @@ class Program
     * @param targetSequence The sequence to search within (e.g., "AGCTAGCAAGC")
     * @return The number of times the modified search sequences appear in the target sequence
     */
-    static int CountType2(string searchSequence, string targetSequence)
+    public static int CountType2(string searchSequence, string targetSequence)
     {
         HashSet<string> uniqueDeletionVariants = new HashSet<string>();
 
@@ -84,7 +84,7 @@ class Program
         return totalOccurrences;
     }
 
-    static int CountType3(string searchSequence, string targetSequence)
+    public static int CountType3(string searchSequence, string targetSequence)
     {
         HashSet<string> uniqueInsertionVariants = new HashSet<string>();
         char[] validCharacters = { 'A', 'G', 'C', 'T' };
