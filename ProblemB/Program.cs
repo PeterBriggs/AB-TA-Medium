@@ -16,35 +16,86 @@ class Program
             results.Add(result);
         }
 
-        // Output all results at the end
         foreach (var result in results)
         {
-            Console.WriteLine($"{result.Type1Count} {result.Type2Count} {result.Type3Count}");
+            Console.WriteLine($"{result.Type1Count}");
         }
     }
 
     /*
-    * Processes a single sequence pair and outputs the results.
+    * Processes a single sequence pair and returns the results.
     * Calculates Type 1, Type 2, and Type 3 matches as defined in the problem.
     * @param input The input string containing search sequence and target sequence
+    * @return The sequence result containing count information
     */
-    static void ProcessSequence(string input)
+    static SequenceResult ProcessSequence(string input)
     {
         string[] parts = input.Split(' ');
         string searchSequence = parts[0];
         string targetSequence = parts[1];
 
+        int type1Count = CountType1(searchSequence, targetSequence);
+
         return new SequenceResult
         {
-           //TODO
+            Type1Count = type1Count,
         };
+    }
+
+    /*
+    * Counts Type 1 matches between search and target sequences.
+    * Type 1 matches are exact occurrences of the search sequence in the target sequence.
+    * @param searchSequence The sequence to search for (e.g., "AGC")
+    * @param targetSequence The sequence to search within (e.g., "AGCTAGCAAGC")
+    * @return The number of times the search sequence appears exactly in the target sequence
+    */
+    static int CountType1(string searchSequence, string targetSequence)
+    {
+        return CountSubstring(searchSequence, targetSequence);
+    }
+
+    /*
+    * Counts occurrences of a substring within a string.
+    * @param subStr The substring to search for
+    * @param mainStr The main string to search within
+    * @return The number of occurrences
+    */
+    static int CountSubstring(string subStr, string mainStr)
+    {
+        if (subStr.Length > mainStr.Length)
+            return 0;
+
+        int count = 0;
+        for (int i = 0; i <= mainStr.Length - subStr.Length; i++)
+        {
+            bool match = true;
+            for (int j = 0; j < subStr.Length; j++)
+            {
+                if (mainStr[i + j] != subStr[j])
+                {
+                    match = false;
+                    break;
+                }
+            }
+            if (match)
+                count++;
+        }
+        return count;
     }
 }
 
-// Class to store the results for a sequence pair
+/// <summary>
+/// Class to store the match counts for a sequence pair analysis.
+/// Contains the results of Type 1, Type 2, and Type 3 matches
+/// between a search sequence and target sequence.
+/// </summary>
 class SequenceResult
 {
+    /// <summary>
+    /// Number of Type 1 matches found.
+    /// Type 1 matches are exact occurrences of the search sequence in the target sequence.
+    /// </summary>
     public int Type1Count { get; set; }
-    public int Type2Count { get; set; }
-    public int Type3Count { get; set; }
+    // public int Type2Count { get; set; }
+    // public int Type3Count { get; set; }
 }
