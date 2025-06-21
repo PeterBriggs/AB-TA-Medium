@@ -118,15 +118,14 @@ class Program
     {
         if (searchSequence.Length > targetSequence.Length)
             return 0;
-        Console.WriteLine("1");
+
         int count = 0;
+
         for (int i = 0; i <= targetSequence.Length - searchSequence.Length; i++)
         {
-            Console.WriteLine("2");
             bool match = true;
             for (int j = 0; j < searchSequence.Length; j++)
             {
-                Console.WriteLine("3");
                 if (targetSequence[i + j] != searchSequence[j])
                 {
                     match = false;
