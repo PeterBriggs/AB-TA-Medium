@@ -4,14 +4,14 @@ using System.Reflection;
 using System.IO;
 
 /*
-* Test harness for the DNA sequence analysis program.
+* Test harness for the sequence analysis program.
 * Contains automated tests to verify the correctness of the sequence counting algorithms.
 */
 class UnitTests
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Running automated tests for DNA sequence analysis...");
+        Console.WriteLine("Running automated tests for sequence analysis...");
         Console.WriteLine("=================================================");
 
         RunAllTests();
@@ -24,7 +24,7 @@ class UnitTests
     private static int _failCount = 0;
 
     /*
-    * Runs all test cases for the DNA sequence analysis program.
+    * Runs all test cases for the sequence analysis program.
     */
     static void RunAllTests()
     {
